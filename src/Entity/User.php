@@ -10,9 +10,9 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Repository\UserRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -35,6 +35,8 @@ use Symfony\Component\Serializer\Attribute\Groups;
 )]
 class User
 {
+    const DATE_FORMAT = 'Y-m-d';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -43,18 +45,23 @@ class User
 
     #[ORM\Column(length: 255)]
     #[Groups(['user:read', 'user:write'])]
+    #[Assert\NotBlank(message: "firstName is a required field")]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['user:read', 'user:write'])]
+    #[Assert\NotBlank(message: "lastName is a required field")]
     private ?string $lastName = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(length: 100)]
     #[Groups(['user:read', 'user:write'])]
-    private ?\DateTimeInterface $dateOfBirth = null;
+    #[Assert\NotBlank(message: "dateOfBirth is a required field")]
+    #[Assert\Date(message: "The value {{ value }} is not a valid date. It should be in the format Y-m-d.")]
+    private ?string $dateOfBirth = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['user:read', 'user:write'])]
+    #[Assert\Email]
     private ?string $email = null;
 
     public function getId(): ?int
@@ -86,12 +93,12 @@ class User
         return $this;
     }
 
-    public function getDateOfBirth(): ?\DateTimeInterface
+    public function getDateOfBirth(): ?string
     {
         return $this->dateOfBirth;
     }
 
-    public function setDateOfBirth(\DateTimeInterface $dateOfBirth): static
+    public function setDateOfBirth(string $dateOfBirth): static
     {
         $this->dateOfBirth = $dateOfBirth;
 
