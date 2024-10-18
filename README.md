@@ -53,12 +53,27 @@ This command will:
 The main API endpoint for creating a user is:
 
 - POST `/api/users`
+```json 
+   {
+      "firstName": "Roger",
+      "lastName": "Rabbit",
+      "dateOfBirth": "1988-01-01",
+      "email": "roger.rabbit@toontown.com"
+   }
+  ```
 
-For more details on the API, refer to the API documentation or the `User` entity in `src/Entity/User.php`.
+### curl: 
+```bash
+curl -X 'POST' \
+   'http://127.0.0.1:8000/api/users' \
+   -H 'accept: application/ld+json' \
+   -H 'Content-Type: application/ld+json' \
+   -d '{
+      "firstName": "Roger",
+      "lastName": "Rabbit",
+      "dateOfBirth": "1988-01-01",
+      "email": "roger.rabbit@toontown.com"
+   }'
+```
 
-## Project Structure
 
-- `src/`: Contains the main application code
-- `tests/`: Contains test files
-- `migrations/`: Database migration files
-- `config/`: Configuration files
