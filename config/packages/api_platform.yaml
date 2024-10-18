@@ -1,7 +1,8 @@
 api_platform:
-    title: Fade Tech Assessment
-    version: 1.0.0
-    defaults:
-        stateless: true
-        cache_headers:
-            vary: ['Content-Type', 'Authorization', 'Origin']
+  title: Fade Tech Assessment
+  version: 1.0.0
+  use_symfony_listeners: true
+  defaults:
+    stateless: true
+    cache_headers:
+      vary: ["Content-Type", "Authorization", "Origin"]
