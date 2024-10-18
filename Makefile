@@ -5,6 +5,10 @@ start:
 	symfony console doctrine:database:drop --force || true
 	symfony console doctrine:database:create
 	symfony console doctrine:migrations:migrate -n
+	symfony serve:start --no-tls -d
+
+stop:
+	symfony serve:stop
 
 tests:
 	symfony console doctrine:database:drop --force --env=test || true
