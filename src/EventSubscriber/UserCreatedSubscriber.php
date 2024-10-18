@@ -4,7 +4,7 @@ namespace App\EventSubscriber;
 
 use ApiPlatform\Symfony\EventListener\EventPriorities;
 use App\Entity\User;
-use App\Service\MockEmailService;
+use App\Service\FakeEmailService;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 readonly class UserCreatedSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private MockEmailService $emailService, private LoggerInterface $logger)
+    public function __construct(private FakeEmailService $emailService, private LoggerInterface $logger)
     {
     }
 

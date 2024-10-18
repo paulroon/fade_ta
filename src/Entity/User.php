@@ -20,11 +20,11 @@ use Symfony\Component\Validator\Constraints as Assert;
     shortName: 'user',
     operations: [
         new Post(),
-        new GetCollection(),
-        new Get(),
-        new Delete(),
-        new Put(),
-        new Patch()
+//        new GetCollection(),
+//        new Get(),
+//        new Delete(),
+//        new Put(),
+//        new Patch()
     ],
     normalizationContext: [
         'groups' => ['user:read'],
